@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { 
     CreatePageContainer,
     CreatePageWrapper,
@@ -13,7 +13,37 @@ import {
     AddBtn
  } from './CreatePage.elements'
 
-export default function CreatePage() {
+ const InitialState = {
+     item:"", 
+     steps:[], 
+     ingredients:[], 
+ }
+export default function CreatePage({createRecipe}) {
+
+    const [data, setData] = useState(InitialState)
+    const [ing, setIng] = useState("");
+
+    const onIngredients = (e) =>{
+        setIng(e.target.value)
+    }
+    console.log(ing)
+
+    const onChange=(e)=>{
+        const {name, value} = e.target;
+        setData({
+            ...data,
+            [name]:value
+        })
+    }
+
+    const addRecipe=(e)=>{
+        e.preventDefault();
+        const a = ing.split(":");
+        a[0] = a[0] + ":";
+        data.ingredients.push(a)
+        createRecipe(data)
+        setData(InitialState)
+    }
     return (
         <CreatePageContainer>
             <Headline>
@@ -23,7 +53,11 @@ export default function CreatePage() {
                 <RecipeForm>
                     <FormGroup>
                         <FormLabel>Recipe</FormLabel>
-                        <FormInput/>
+                        <FormInput
+                        name="item"
+                        value={data.item}
+                        onChange={onChange}
+                        />
                     </FormGroup>
                     <FormGroup>
                         <FormLabel >Ingredient</FormLabel>
@@ -36,7 +70,11 @@ export default function CreatePage() {
                         <Instruction>
                             Press Enter for another new ingredient
                         </Instruction>
-                        <FormInput big/>
+                        <FormInput
+                        name="ingredients"
+                        value={ing}
+                        onChange={onIngredients}
+                        big/>
                     </FormGroup>
                     <FormGroup>
                         <FormLabel>Preparations</FormLabel>
@@ -46,14 +84,18 @@ export default function CreatePage() {
                         <Instruction>
                             Press Enter twice for new steps
                         </Instruction>
-                        <FormInput big/>
+                        <FormInput 
+                        name="steps"
+                        value={data.steps}
+                        onChange={onChange}
+                        big/>
                     </FormGroup>
                 </RecipeForm>
                 <Btnwrap>
                     <CancelBtn>
                         Cancel
                     </CancelBtn>
-                    <AddBtn>
+                    <AddBtn onClick={addRecipe}>
                         Add Recipe
                     </AddBtn>
                 </Btnwrap>

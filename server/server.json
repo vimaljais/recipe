@@ -1,28 +1,51 @@
 {
-    "recipes":[
-        {
-            "id":1,
-            "item":"Coffee",
-            "step":"Step1"
-        },
-        {
-            "id":2,
-            "item":"Salad",
-            "step":"Step1"
-        }
-    ],
-    "shopping-list":[
-        {
-            "id":1,
-            "name":"Mango"
-        },
-        {
-            "id":2,
-            "name":"Sugar"
-        },
-        {
-            "id":3,
-            "name":"Chilli"
-        }
-    ]
+  "recipes": [
+    {
+      "id": 1,
+      "item": "Coffee",
+      "step": "Step1"
+    },
+    {
+      "id": 2,
+      "item": "Salad",
+      "step": "Step1"
+    },
+    {
+      "id": "ba4d7285-3999-4792-acb4-66305c6b52e8",
+      "item": "Rice",
+      "steps": "Add water",
+      "ingredients": "Water, Rice, Salt"
+    },
+    {
+      "id": "d6d813eb-a67b-4d86-9635-5907b318de80",
+      "item": "Hot Milk",
+      "steps": "Boli",
+      "ingredients": "Milk, Sugar, Heat"
+    },
+    {
+      "id": "6ee9be5b-a176-472f-b74c-e9cd54140fae",
+      "item": "Shake",
+      "steps": "Step1",
+      "ingredients": [
+        [
+          "Apple:100ml",
+          "100ml"
+        ]
+      ]
+    }
+  ],
+  "shopping-list": [
+    {
+      "id": 1,
+      "name": "Mango"
+    },
+    {
+      "id": 2,
+      "name": "Sugar"
+    },
+    {
+      "id": 3,
+      "name": "Chilli"
+    }
+  ]
 }

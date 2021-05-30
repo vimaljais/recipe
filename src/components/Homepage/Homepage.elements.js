@@ -37,9 +37,9 @@ flex-direction:column;
 `
 export const HomeContent = styled.div`
 height: 100%;
-width:100%;
 display: flex;
 align-items: flex-start;
+flex-direction: column;
 
 `
 export const Title = styled.h3`
@@ -47,15 +47,14 @@ margin: 3rem 2rem;
 font-size: 1.4rem;
 `
 export const FoodMenu = styled.div`
-margin: 3rem 2rem;
+margin: 2rem 0;
 font-size: 1.2rem;
 width:100%;
 `
 export const FoodItem = styled.h4`
 color:#6f7d16;
 padding: 2rem 1rem;
-width: 100%;
-height: 100%;
+cursor:pointer;
 &:hover{
     background: #abb3ad;
     transition: 0.2s ease;

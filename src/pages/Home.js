@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Homepage from "../components/Homepage/Homepage";
-// import api from '../api/recipe'
-import axios from "axios";
+import api from '../api/recipe'
+// import axios from "axios";
 
 export default function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/recipes").then((response) => {
+    api.get("/recipes").then((response) => {
       setData(response.data);
     });
   }, []);

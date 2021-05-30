@@ -11,7 +11,7 @@ import {
 } from "./Homepage.elements";
 export default function Homepage(props) {
   const allRecipes = props.data;
-  console.log(allRecipes);
+  console.log("All",allRecipes);
   return (
     <HomepageContainer>
       <Headline>Welcome To Recipe Partner</Headline>
@@ -22,13 +22,15 @@ export default function Homepage(props) {
       <HomeWrapper>
         <Title>Recipe</Title>
         <HomeContent>
+        <FoodMenu >
           {allRecipes.map((recipe) => {
             return (
-              <FoodMenu key={recipe.id}>
-                <FoodItem>{recipe.name}</FoodItem>
-              </FoodMenu>
+              
+                <FoodItem key={recipe.id}> {recipe.item}</FoodItem>
+              
             );
           })}
+          </FoodMenu>
         </HomeContent>
       </HomeWrapper>
     </HomepageContainer>
