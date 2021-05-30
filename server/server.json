@@ -1,0 +1,28 @@
+{
+    "recipes":[
+        {
+            "id":1,
+            "item":"Coffee",
+            "step":"Step1"
+        },
+        {
+            "id":2,
+            "item":"Salad",
+            "step":"Step1"
+        }
+    ],
+    "shopping-list":[
+        {
+            "id":1,
+            "name":"Mango"
+        },
+        {
+            "id":2,
+            "name":"Sugar"
+        },
+        {
+            "id":3,
+            "name":"Chilli"
+        }
+    ]
+}
