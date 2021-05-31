@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   HomepageContainer,
   Headline,
@@ -9,6 +8,7 @@ import {
   FoodItem,
   FoodMenu,
   Title,
+  FoodLink
 } from "./Homepage.elements";
 export default function Homepage(props) {
   const allRecipes = props.data;
@@ -27,9 +27,9 @@ export default function Homepage(props) {
           {allRecipes.map((recipe) => {
             return (
               <FoodItem key={recipe.id}>
-                <Link to={`/recipes/${recipe.id}`}>
+                <FoodLink to={`/recipes/${recipe.id}`}>
                   {recipe.item}
-                </Link>
+                </FoodLink>
               </FoodItem>
             );
           })}

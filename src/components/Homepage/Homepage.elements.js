@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -52,7 +53,6 @@ font-size: 1.2rem;
 width:100%;
 `
 export const FoodItem = styled.h4`
-color:#6f7d16;
 padding: 2rem 1rem;
 cursor:pointer;
 &:hover{
@@ -60,4 +60,11 @@ cursor:pointer;
     transition: 0.2s ease;
     border-radius: 4px;
 }
+`
+export const FoodLink = styled(Link)`
+text-decoration: none;
+border: none;
+outline: none;
+color:#6f7d16;
+
 `

@@ -10,7 +10,9 @@ import {
     GridWrap
  } from './EditPage.elements'
 
-export default function EditPage() {
+export default function EditPage(props) {
+  const allRecipes = props.data;
+    
     return (
         <EditPageContainer>
             <Headline>
@@ -24,30 +26,19 @@ export default function EditPage() {
             
                 <EditContent>                
                     <EditMenu>
-                        <GridWrap>
-                            <EditItem primary>
-                                Coffee
-                            </EditItem>
-                            <EditItem >
-                                Edit
-                            </EditItem>
-                        </GridWrap>
-                        <GridWrap>
-                            <EditItem primary>
-                                Coffee
-                            </EditItem>
-                            <EditItem>
-                                Edit
-                            </EditItem>
-                        </GridWrap>
-                        <GridWrap>
-                            <EditItem primary>
-                                Coffee
-                            </EditItem>
-                            <EditItem>
-                                Edit
-                            </EditItem>
-                        </GridWrap>
+                        
+                        {allRecipes.map((recipe) => {
+                            return (
+                                <GridWrap key={recipe.id} to={`/recipes-edit/${recipe.id}`}>
+                                    <EditItem primary>
+                                    {recipe.item}
+                                    </EditItem>
+                                    <EditItem >
+                                        Edit
+                                    </EditItem>
+                                </GridWrap>
+                            );
+                        })}            
                     </EditMenu>
                 </EditContent>
            

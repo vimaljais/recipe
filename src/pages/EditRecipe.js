@@ -1,10 +1,18 @@
-import React from 'react'
+import React ,  { useEffect, useState }from 'react'
 import EditPage from '../components/EditPage/EditPage'
+import api from '../api/recipe'
 
 export default function EditRecipe() {
+  const [data, setData] = useState([]);
+
+    useEffect(() => {
+        api.get("/recipes").then((response) => {
+          setData(response.data);
+        });
+      }, []);
     return (
         <>
-            <EditPage/>
+            {data.length > 0? <EditPage data={data}/> : null}
         </>
     )
 }
