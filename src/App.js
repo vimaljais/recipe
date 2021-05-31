@@ -8,6 +8,7 @@ import ShoppingList from "./pages/ShoppingList";
 import Navbar from "./components/Navbar/Navbar";
 import  { useState } from "react";
 import Sidebar from "./components/Navbar/SideBar";
+import Recipe from "./pages/Recipe";
 
 function App() {
   const [isOpen, setisOpen] = useState(false)
@@ -24,10 +25,11 @@ function App() {
       <Sidebar onToggle={onToggle} isOpen={isOpen}/>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/create-recipe" component={CreateRecipe}/>
-          <Route exact path="/edit-recipe" component={EditRecipe}/>
-          <Route exact path="/delete-recipe" component={DeleteRecipe}/>
-          <Route exact path="/shopping-list" component={ShoppingList}/>
+          <Route  path="/create-recipe" component={CreateRecipe}/>
+          <Route  path="/edit-recipe" component={EditRecipe}/>
+          <Route  path="/delete-recipe" component={DeleteRecipe}/>
+          <Route  path="/shopping-list" component={ShoppingList}/>
+          <Route path="/recipes/:id" component={Recipe}/>
         </Switch>
       </Router>
     </>

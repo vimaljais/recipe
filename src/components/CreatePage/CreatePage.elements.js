@@ -43,8 +43,11 @@ export const Instruction = styled.p`
 color:#fa5c34;
 margin:10px 0;
 `
-export const FormInput = styled.input`
+export const FormInput = styled.textarea`
 padding: ${({big})=>(big? "4rem 0" :"0 0")};
+resize: none;
+border-radius: 4px;
+border: solid grey 1px;
 `
 export const Btnwrap = styled.div`
 margin:1.5rem 0;

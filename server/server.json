@@ -1,58 +1,12 @@
 {
   "recipes": [
     {
-      "id": 1,
-      "item": "Coffee",
-      "step": "Step1"
-    },
-    {
-      "id": 2,
-      "item": "Salad",
-      "step": "Step1"
-    },
-    {
-      "id": "ba4d7285-3999-4792-acb4-66305c6b52e8",
-      "item": "Rice",
-      "steps": "Add water",
-      "ingredients": "Water, Rice, Salt"
-    },
-    {
-      "id": "d6d813eb-a67b-4d86-9635-5907b318de80",
-      "item": "Hot Milk",
-      "steps": "Boli",
-      "ingredients": "Milk, Sugar, Heat"
-    },
-    {
-      "id": "6ee9be5b-a176-472f-b74c-e9cd54140fae",
-      "item": "Shake",
-      "steps": "Step1",
-      "ingredients": [
-        [
-          "Apple:100ml",
-          "100ml"
-        ]
-      ]
-    },
-    {
-      "id": "e0f736a7-50af-4bed-8d15-e00dcc263455",
-      "item": "",
-      "steps": [],
+      "id": "c8960e25-b196-4f87-bb2a-18d64d3376a0",
+      "item": "Tes1",
+      "steps": "Steps",
       "ingredients": [
         {
-          "milk": " 100ml"
-        }
-      ]
-    },
-    {
-      "id": "2d65fa25-feb9-40ec-8513-e6f510fe94df",
-      "item": "",
-      "steps": [],
-      "ingredients": [
-        {
-          "milk": " 100ml"
-        },
-        {
-          "water": " 5ml"
+          "Apple": " 1gram"
         }
       ]
     }

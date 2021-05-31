@@ -37,6 +37,7 @@ export default function CreatePage({ createRecipe }) {
 
   const addRecipe = (e) => {
     e.preventDefault();
+    data.steps.split("\n")
     const a = ing.split(":");
     const b = {
       [a[0]]: a[1],
