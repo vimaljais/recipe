@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -25,7 +26,7 @@ flex-direction: column;
     margin:0 1rem ;
 }
 `
-export const GridWrap = styled.div`
+export const GridWrap = styled(Link)`
 display: grid;
 grid-template-columns: 1fr 1fr;
 grid-column: auto;
@@ -45,6 +46,9 @@ export const Title = styled.h3`
 margin: 3rem 2rem;
 font-size: 1.4rem;
 text-align: center;
+color:#000;
+text-decoration:none;
+border: none;
 &:hover{
     background: none;
     transition: 0.2s ease;

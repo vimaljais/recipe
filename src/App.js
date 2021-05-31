@@ -10,6 +10,7 @@ import  { useState } from "react";
 import Sidebar from "./components/Navbar/SideBar";
 import Recipe from "./pages/Recipe";
 import UpdateRecipe from "./pages/UpdateRecipe";
+import RemoveRecipe from "./pages/RemoveRecipe";
 
 function App() {
   const [isOpen, setisOpen] = useState(false)
@@ -32,6 +33,7 @@ function App() {
           <Route  path="/shopping-list" component={ShoppingList}/>
           <Route path="/recipes/:id" component={Recipe}/>
           <Route path="/recipes-edit/:id" component={UpdateRecipe}/>
+          <Route path="/recipes-delete/:id" component={RemoveRecipe}/>
         </Switch>
       </Router>
     </>
