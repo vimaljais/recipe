@@ -10,7 +10,8 @@ import {
     GridWrap
  } from './Shopping.elements'
 
-export default function ShoppingPage() {
+export default function ShoppingPage(props) {
+    
     return (
         <ShoppingPageContainer>
             <Headline>
