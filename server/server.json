@@ -9,6 +9,53 @@
           "Apple": " 1gram"
         }
       ]
+    },
+    {
+      "id": "7fdea11d-cab9-4c49-87e5-800ff94a23f9",
+      "item": "tea",
+      "steps": "pour water\npour milk",
+      "ingredients": [
+        {}
+      ]
+    },
+    {
+      "id": "a22fccb7-2141-4937-9d1d-ff0db93e1654",
+      "item": "coffee",
+      "steps": "pour water\npour coffee",
+      "ingredients": [
+        {},
+        {
+          "milkL 1bottle\nwater": " 2bottle \ncoffee"
+        }
+      ]
+    },
+    {
+      "id": "440b779f-7e67-4114-9849-b9ab3d05e0a0",
+      "item": "dsadasd",
+      "steps": "asdasd\ndasdas",
+      "ingredients": [
+        {},
+        {
+          "milkL 1bottle\nwater": " 2bottle \ncoffee"
+        },
+        {
+          "milkL 1bottle\nwater": " 2bottle \ncoffee"
+        }
+      ]
+    },
+    {
+      "id": "2a92683b-19fd-4aae-bb16-e358e30ac687",
+      "item": "maggi",
+      "steps": [
+        "pour water",
+        "drink water",
+        "pour maggi"
+      ],
+      "ingredients": {
+        "water": "10ml",
+        "maggi": "2packet",
+        "pet": "1"
+      }
     }
   ],
   "shopping-list": [
