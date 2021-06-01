@@ -8,11 +8,11 @@ import {
   FoodItem,
   FoodMenu,
   Title,
-  FoodLink
+  FoodLink,
 } from "./Homepage.elements";
 export default function Homepage(props) {
   const allRecipes = props.data;
-  // console.log("All",allRecipes);
+  console.log("All", allRecipes);
   return (
     <HomepageContainer>
       <Headline>Welcome To Recipe Partner</Headline>
@@ -23,16 +23,16 @@ export default function Homepage(props) {
       <HomeWrapper>
         <Title>Recipe</Title>
         <HomeContent>
-        <FoodMenu >
-          {allRecipes.map((recipe) => {
-            return (
-              <FoodItem key={recipe.id}>
-                <FoodLink to={`/recipes/${recipe.id}`}>
-                  {recipe.item}
-                </FoodLink>
-              </FoodItem>
-            );
-          })}
+          <FoodMenu>
+            {allRecipes.map((recipe) => {
+              return (
+                <FoodItem key={recipe.id}>
+                  <FoodLink to={`/recipes/${recipe.id}`}>
+                    {recipe.item}
+                  </FoodLink>
+                </FoodItem>
+              );
+            })}
           </FoodMenu>
         </HomeContent>
       </HomeWrapper>
