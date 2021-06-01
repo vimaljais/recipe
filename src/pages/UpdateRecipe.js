@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/recipe";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
 
 export default function UpdateRecipe() {
+  //To Retrieve
   const params = useParams();
+  const [recipeData, setRecipeData] = useState([]);
   const [data, setData] = useState([]);
   const [keys, setKeys] = useState([]);
   const [values, setvalues] = useState([]);
-
+  //To Update
+  const history = useHistory();
   useEffect(() => {
     api.get(`/recipes/${params.id}`).then((response) => {
       setData(response.data);
     });
   }, []);
+
+  const [title, setTitle] = useState("");
+  const [ing, setIng] = useState("");
+  const [steps, setSteps] = useState("");
 
   useEffect(() => {
     if (data.ingredients) {
@@ -24,6 +31,55 @@ export default function UpdateRecipe() {
     }
   }, [data]);
 
+  const onTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onIngredients = (e) => {
+    setIng(e.target.value);
+  };
+
+  const onSteps = (e) => {
+    setSteps(e.target.value);
+  };
+  const ingobj = (str) => {
+    var values = str.split("\n");
+    var obj = {};
+    if (str.length > 0) {
+      for (var i = 0; i < values.length; i++) {
+        var keyValue = values[i].split(":");
+        keyValue[1] = keyValue[1].trim();
+        obj[keyValue[0]] = keyValue[1];
+      }
+    }
+    return obj;
+  };
+
+  const createStepsArray = (str) => {
+    return str.split("\n");
+  };
+  const updateRecipe =async(recipe) =>{
+    console.log(recipe);
+        const request = {
+            ...recipe
+        }
+        const response =  await api.put(`/recipes/${params.id}`, request);
+        setRecipeData([...recipeData, response.data])
+  }
+  const addRecipe = (e) => {
+    var ingredientObj = ingobj(ing);
+    const stepsArray = createStepsArray(steps);
+    const final = {
+      item: title,
+      steps: stepsArray,
+      ingredients: ingredientObj,
+    };
+    updateRecipe(final);
+    history.push('/', {from: "CreatePage"})
+  };
+  const cancel=()=>{
+    history.push('/', {from: "CreatePage"})
+  }
   return (
     <EditPageContainer>
       <Headline>Edit Recipe</Headline>
@@ -31,18 +87,19 @@ export default function UpdateRecipe() {
         <RecipeForm>
           <FormGroup>
             <FormLabel>Recipe</FormLabel>
-            <FormInput defaultValue={data.item} name="item" />
+            <FormInput defaultValue={data.item} name="item" onChange={onTitle} />
           </FormGroup>
           <FormGroup>
             <FormLabel>Ingredient</FormLabel>
             <Instruction>Format to enter ingredients</Instruction>
             <Instruction>Name of ingredient: Quantity Unit</Instruction>
             <Instruction>Press Enter for another new ingredient</Instruction>
-            {keys.length > 0 ? (
+            {keys.length < 0 ? (
               <FormInput
                 name="ingredients"
-                defaultValue={`${keys} ${values}`}
+                defaultValue={data.ingredients}
                 big
+                onChange={onIngredients}
               />
             ) : null}
           </FormGroup>
@@ -50,12 +107,12 @@ export default function UpdateRecipe() {
             <FormLabel>Preparations</FormLabel>
             <Instruction>Format to enter preparation steps</Instruction>
             <Instruction>Press Enter twice for new steps</Instruction>
-            <FormInput defaultValue={data.steps} name="steps" big />
+            <FormInput defaultValue={data.steps} name="steps" big onChange={onSteps}/>
           </FormGroup>
         </RecipeForm>
         <Btnwrap>
-          <CancelBtn>Cancel</CancelBtn>
-          <AddBtn>Edit Recipe</AddBtn>
+          <CancelBtn onClick={cancel}>Cancel</CancelBtn>
+          <AddBtn onClick={addRecipe}>Edit Recipe</AddBtn>
         </Btnwrap>
       </EditPageWrapper>
     </EditPageContainer>

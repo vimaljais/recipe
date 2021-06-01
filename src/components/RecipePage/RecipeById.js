@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import {
   RecipeContainer,
   Headline,
@@ -9,13 +10,15 @@ import {
   Title,
   Content,
   ContentItem,
+  Btnwrap,
+  CancelBtn
 } from "./RecipeById.elements";
 
 export default function RecipeById({ data }) {
   const [loaded, setloaded] = useState(false);
   const [ingKeys, setingKeys] = useState([]);
   const [ingValues, setingValues] = useState([]);
-
+  const history = useHistory()
   useEffect(() => {
     if (typeof data === "object") {
       if (data.steps) {
@@ -25,7 +28,9 @@ export default function RecipeById({ data }) {
       }
     }
   }, [data]);
-
+  const cancel=()=>{
+    history.push('/', {from: "CreatePage"})
+  }
   return (
     <>
       <RecipeContainer>
@@ -58,6 +63,9 @@ export default function RecipeById({ data }) {
               </Content>
             </Section>
           </RecipeContent>
+          <Btnwrap>
+          <CancelBtn onClick={cancel}>Go Back</CancelBtn>
+        </Btnwrap>
         </RecipeWrapper>
       </RecipeContainer>
     </>

@@ -13,7 +13,7 @@ export const Headline = styled.h1`
 font-size: clamp(2rem, 5vw, 4rem);
 color:#000;
 text-align: center;
-padding-bottom:3rem;
+
 
 `
 export const Subtitle = styled.div`

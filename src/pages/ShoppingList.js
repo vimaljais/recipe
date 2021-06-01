@@ -11,6 +11,7 @@ export default function ShoppingList() {
         setData(response.data);
       });
     }, []);
+    console.log(data.map(res=>{return res.ingredients}))
     return (
         <>
             {data.length > 0 ? <ShoppingPage data={data} /> : null}

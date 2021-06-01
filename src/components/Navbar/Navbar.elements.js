@@ -7,6 +7,7 @@ height:70px;
 width:100%;
 background:#0d0d0d;
 top:0;
+
 `
 export const NavbarWrapper = styled.div`
 height: 100%;

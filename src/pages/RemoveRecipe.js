@@ -2,43 +2,63 @@ import React, { useEffect, useState } from 'react'
 import api from '../api/recipe'
 import { useParams } from 'react-router'
 import styled from "styled-components"
+import { useHistory } from "react-router";
 
-export default function RemoveRecipe() {
-    const params = useParams()
-    const [data, setData] = useState([])
-    useEffect(()=>{
-        api.get(`/recipes/${params.id}`).then((response) => {
-            setData(response.data);
 
-          });
-    },[])
+
+
+function Remove({ data, onDelete }) {
+    const [loaded, setloaded] = useState(false);
+    const [ingKeys, setingKeys] = useState([]);
+    const [ingValues, setingValues] = useState([]);
+    const history = useHistory()
+    useEffect(() => {
+        if (typeof data === "object") {
+          if (data.steps) {
+            setingKeys(Object.keys(data.ingredients));
+            setingValues(Object.values(data.ingredients));
+            setloaded(true);
+          }
+        }
+      }, [data]);
+      const cancel=()=>{
+        history.push('/delete-recipe', {from: "RemoveRecipe"})
+      }
+    
     return (
         <RecipeContainer>
                 <Headline>Delete Recipe</Headline>
                 <RecipeWrapper >
-                        <RecipeName>Coffee</RecipeName>
+                        <RecipeName>{data.item}</RecipeName>
                         <RecipeContent>
                             <Section>
                                 <Title>Ingredients</Title>
                                 <Content>
-                                    <ContentItem>Milk</ContentItem>
-                                    <ContentItem>Milk</ContentItem>
-                                    <ContentItem>Milk</ContentItem>
-                                    <ContentItem>Milk</ContentItem>
+                                    {ingKeys.length > 0
+                                        ? ingKeys.map((key, i) => {
+                                            return (
+                                                <ContentItem key={i}>
+                                                {ingKeys[i]} {ingValues[i]}
+                                                </ContentItem>
+                                            );
+                                            })
+                                        : null}
                                 </Content>
                             </Section>
                             <Section>
                                 <Title>Preparations</Title>
                                 <Content>
-                                  <ContentItem>Add</ContentItem>
-                                  <ContentItem>Add</ContentItem>
-                                  <ContentItem>Add</ContentItem>
+                                {loaded
+                                    ? data.steps.map((step, i) => {
+                                        return <ContentItem key={i}>{step}</ContentItem>;
+                                        })
+                                    : null}
                                 </Content>
                             </Section>
                         </RecipeContent>
                         <Btnwrap>
-                            <CancelBtn>Cancel</CancelBtn>
-                            <DeleteBtn >Delete Recipe</DeleteBtn>
+                            <CancelBtn onClick={cancel}>Cancel</CancelBtn>
+                            <DeleteBtn onClick={onDelete}>Delete Recipe</DeleteBtn>
                         </Btnwrap>
                   </RecipeWrapper>
 
@@ -134,3 +154,25 @@ color: #fff;
     transition: 0.2s ease-out;
 }
 `
+
+export default function RemoveRecipe(){
+    const params = useParams();
+    const [detail, setDetail] = useState([]);
+    const history = useHistory()
+
+    useEffect(() => {
+        api.get(`/recipes/${params.id}`).then((response) => {
+            setDetail(response.data);
+            });
+    }, []);
+    const onDelete=async()=>{
+        await api.delete(`/recipes/${params.id}`)
+        history.push('/delete-recipe', {from: "RemoveRecipe"})
+    }
+    return (
+            <>
+            <Remove data={detail} onDelete={onDelete}/>
+            {/* {data.length > 0? <RecipeById data={data}/> : null} */}
+            </>
+        );
+}

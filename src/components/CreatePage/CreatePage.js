@@ -12,8 +12,11 @@ import {
   CancelBtn,
   AddBtn,
 } from "./CreatePage.elements";
+import { useHistory } from "react-router-dom";
+
 
 export default function CreatePage({ createRecipe }) {
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [ing, setIng] = useState("");
   const [steps, setSteps] = useState("");
@@ -63,19 +66,12 @@ export default function CreatePage({ createRecipe }) {
       steps: stepsArray,
       ingredients: ingredientObj,
     };
-    console.log(final);
     createRecipe(final);
-    /*    e.preventDefault();
-    data.steps.split("\n");
-    const a = ing.split(":");
-    const b = {
-      [a[0]]: a[1],
-    };
-    data.ingredients.push(b);
-    console.log(data);
-    createRecipe(data);
-    setData(InitialState); */
+    history.push('/', {from: "CreatePage"})
   };
+  const cancel=()=>{
+    history.push('/', {from: "CreatePage"})
+  }
   return (
     <CreatePageContainer>
       <Headline>Create Recipe</Headline>
@@ -100,12 +96,12 @@ export default function CreatePage({ createRecipe }) {
           <FormGroup>
             <FormLabel>Preparations</FormLabel>
             <Instruction>Format to enter preparation steps</Instruction>
-            <Instruction>Press Enter twice for new steps</Instruction>
+            <Instruction>Press Enter for new steps</Instruction>
             <FormInput name="steps" value={steps} onChange={onSteps} big />
           </FormGroup>
         </RecipeForm>
         <Btnwrap>
-          <CancelBtn>Cancel</CancelBtn>
+          <CancelBtn onClick={cancel}>Cancel</CancelBtn>
           <AddBtn onClick={addRecipe}>Add Recipe</AddBtn>
         </Btnwrap>
       </CreatePageWrapper>

@@ -46,3 +46,25 @@ export const ContentItem = styled.div`
 font-size: 16px;
 padding: 8px 0;
 `
+export const Btnwrap = styled.div`
+margin:1.5rem 0;
+display:flex;
+justify-content: center;
+`
+export const CancelBtn = styled.button`
+margin: 0 20px;
+padding: 1rem 2rem;
+font-size: 17px;
+background:#fa5c34;
+outline: none;
+border:none;
+border-radius: 4px;
+white-space: nowrap;
+color: #fff;
+&:hover{
+    background: none;
+    border: #fa5c34 solid 1px;
+    color:#fa5c34;
+    transition: 0.2s ease-out;
+}
+`
