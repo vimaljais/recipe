@@ -1,74 +1,94 @@
-import React, { useEffect, useState } from 'react'
-import { 
-    ShoppingPageContainer,
-    ShoppingWrapper,
-    Headline,
-    ShoppingContent,
-    Title,
-    ShoppingMenu,
-    ShoppingItem,
-    GridWrap
- } from './Shopping.elements'
+import React, { useEffect, useState } from "react";
+import {
+  ShoppingPageContainer,
+  ShoppingWrapper,
+  Headline,
+  ShoppingContent,
+  Title,
+  ShoppingMenu,
+  ShoppingItem,
+  GridWrap,
+} from "./Shopping.elements";
 
-export default function ShoppingPage({data}) {
-    const [loaded, setloaded] = useState(false);
-    const [ingKeys, setingKeys] = useState([]);
-    const [ingValues, setingValues] = useState([]);
+import api from "../../api/recipe";
 
+export default function ShoppingPage() {
+  const [coll, setColl] = useState();
+  const [ing, setIng] = useState([]);
+  const [quantity, setQuantity] = useState([]);
+  const [q, setQ] = useState([]);
+  const [unit, setUnit] = useState([]);
 
-    useEffect(()=>{
-        data.map(res =>{
-            console.log(res)
-        })
-    })
-    useEffect(() => {
-        if (typeof data === "object") {
-          if (data.steps) {
-            setingKeys(Object.keys(data.ingredients));
-            setingValues(Object.values(data.ingredients));
-            setloaded(true);
-            
-          }
-        }
-      }, [data]);
+  useEffect(() => {
+    var c = {};
+    api.get("/recipes").then((res) => {
+      res.data.map((rec) => {
+        const d = rec.ingredients;
+        c = Object.assign(c, d);
+      });
+      setColl(c);
+    });
+  }, []);
 
+  useEffect(() => {
+    if (typeof coll === "object") {
+      setIng(Object.keys(coll));
+      setQuantity(Object.values(coll));
+    }
+  }, [coll]);
+
+  useEffect(() => {
+    if (quantity.length > 0) {
+      quantity.map((single) => {
+        let num = single.match(/\d+/g);
+        let letr = single.match(/[a-zA-Z]+/g);
+        setQ((oldArray) => [...oldArray, num]);
+        setUnit((oldArray) => [...oldArray, letr]);
+      });
+    }
+  }, [ing, quantity]);
+
+  const finalreturn = q.map((a, i) => {
     return (
-        <ShoppingPageContainer>
-            <Headline>
-            Shopping List
-            </Headline>
-            <ShoppingWrapper>
-            <GridWrap hoverBg>
-            <Title>Ingredients</Title>
-            <Title>Quantity</Title>
-            <Title>Unit</Title>
+      <GridWrap key={i}>
+        <ShoppingItem primary>{ing[i]}</ShoppingItem>
+        <ShoppingItem>{q[i]}</ShoppingItem>
+        <ShoppingItem>{unit[i]}</ShoppingItem>
+      </GridWrap>
+    );
+  });
+
+  return (
+    <ShoppingPageContainer>
+      <Headline>Shopping List</Headline>
+      <ShoppingWrapper>
+        <GridWrap hoverBg>
+          <Title>Ingredients</Title>
+          <Title>Quantity</Title>
+          <Title>Unit</Title>
+        </GridWrap>
+
+        <ShoppingContent>
+          <ShoppingMenu>
+            {finalreturn}
+            {/*             <GridWrap>
+              <ShoppingItem primary>Coffee</ShoppingItem>
+              <ShoppingItem>Shopping</ShoppingItem>
+              <ShoppingItem>Shopping</ShoppingItem>
             </GridWrap>
-            
-                <ShoppingContent>                
-                    <ShoppingMenu>
-                        <GridWrap>
-                        {ingKeys.length > 0
-                            ? ingKeys.map((key, i) => {
-                                return (
-                                    <>
-                                        <ShoppingItem primary key={i}>
-                                            {ingKeys[i]} 
-                                        </ShoppingItem>
-                                        <ShoppingItem>
-                                                {ingValues[i]}
-                                        </ShoppingItem>
-                                        <ShoppingItem >
-                                            Shopping
-                                        </ShoppingItem>
-                                    </>
-                                    
-                                );
-                                })
-                            : null}        
-                        </GridWrap>                        
-                    </ShoppingMenu>
-                </ShoppingContent>
-           
-            </ShoppingWrapper>
-        </ShoppingPageContainer>    )
+            <GridWrap>
+              <ShoppingItem primary>Coffee</ShoppingItem>
+              <ShoppingItem>Shopping</ShoppingItem>
+              <ShoppingItem>Shopping</ShoppingItem>
+            </GridWrap>
+            <GridWrap>
+              <ShoppingItem primary>Coffee</ShoppingItem>
+              <ShoppingItem>Shopping</ShoppingItem>
+              <ShoppingItem>Shopping</ShoppingItem>
+            </GridWrap> */}
+          </ShoppingMenu>
+        </ShoppingContent>
+      </ShoppingWrapper>
+    </ShoppingPageContainer>
+  );
 }

@@ -24,10 +24,16 @@ export default function UpdateRecipe() {
 
   useEffect(() => {
     if (data.ingredients) {
-      for (var key in data.ingredients[0]) {
-        setKeys((oldArray) => [...oldArray, key]);
-        setvalues((oldArray) => [...oldArray, data.ingredients[0][key]]);
-      }
+      var v = data.ingredients;
+      v = JSON.stringify(v);
+      v = v
+        .replace("}", "")
+        .replace("{", "")
+        .replace(/\"/g, "")
+        .replace(",", "\n")
+        .replace(",", "\n");
+      setIng(v);
+      setTitle(data.item);
     }
   }, [data]);
 
@@ -58,14 +64,13 @@ export default function UpdateRecipe() {
   const createStepsArray = (str) => {
     return str.split("\n");
   };
-  const updateRecipe =async(recipe) =>{
-    console.log(recipe);
-        const request = {
-            ...recipe
-        }
-        const response =  await api.put(`/recipes/${params.id}`, request);
-        setRecipeData([...recipeData, response.data])
-  }
+  const updateRecipe = async (recipe) => {
+    const request = {
+      ...recipe,
+    };
+    const response = await api.put(`/recipes/${params.id}`, request);
+    setRecipeData([...recipeData, response.data]);
+  };
   const addRecipe = (e) => {
     var ingredientObj = ingobj(ing);
     const stepsArray = createStepsArray(steps);
@@ -75,11 +80,11 @@ export default function UpdateRecipe() {
       ingredients: ingredientObj,
     };
     updateRecipe(final);
-    history.push('/', {from: "CreatePage"})
+    history.push("/", { from: "CreatePage" });
   };
-  const cancel=()=>{
-    history.push('/', {from: "CreatePage"})
-  }
+  const cancel = () => {
+    history.push("/", { from: "CreatePage" });
+  };
   return (
     <EditPageContainer>
       <Headline>Edit Recipe</Headline>
@@ -87,17 +92,21 @@ export default function UpdateRecipe() {
         <RecipeForm>
           <FormGroup>
             <FormLabel>Recipe</FormLabel>
-            <FormInput defaultValue={data.item} name="item" onChange={onTitle} />
+            <FormInput
+              defaultValue={data.item}
+              name="item"
+              onChange={onTitle}
+            />
           </FormGroup>
           <FormGroup>
             <FormLabel>Ingredient</FormLabel>
             <Instruction>Format to enter ingredients</Instruction>
             <Instruction>Name of ingredient: Quantity Unit</Instruction>
             <Instruction>Press Enter for another new ingredient</Instruction>
-            {keys.length < 0 ? (
+            {ing.length > 0 ? (
               <FormInput
                 name="ingredients"
-                defaultValue={data.ingredients}
+                defaultValue={ing}
                 big
                 onChange={onIngredients}
               />
@@ -107,7 +116,12 @@ export default function UpdateRecipe() {
             <FormLabel>Preparations</FormLabel>
             <Instruction>Format to enter preparation steps</Instruction>
             <Instruction>Press Enter twice for new steps</Instruction>
-            <FormInput defaultValue={data.steps} name="steps" big onChange={onSteps}/>
+            <FormInput
+              defaultValue={data.steps}
+              name="steps"
+              big
+              onChange={onSteps}
+            />
           </FormGroup>
         </RecipeForm>
         <Btnwrap>

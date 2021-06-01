@@ -23,17 +23,17 @@
       }
     },
     {
-      "id": "835bf29c-7c80-4476-bf9e-f7aa9566637a",
       "item": "Maggie",
       "steps": [
-        "Boil",
-        "Server"
+        "Boil,Server,service"
       ],
       "ingredients": {
         "Maggie": "1pack",
         "Chilly": "2pcs",
-        "Water": "100ml"
-      }
+        "Water": "100ml",
+        "milk": "50ml"
+      },
+      "id": "835bf29c-7c80-4476-bf9e-f7aa9566637a"
     },
     {
       "item": "Salad",
@@ -43,6 +43,15 @@
       ],
       "ingredients": {},
       "id": "f6cf52cf-003d-4a65-9201-c88d314be96a"
+    },
+    {
+      "item": "",
+      "steps": [
+        "pour water,pour milk",
+        "then heat"
+      ],
+      "ingredients": {},
+      "id": "6b59d976-f900-4830-b3fa-892858bab109"
     }
   ],
   "shopping-list": [
